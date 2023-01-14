@@ -108,3 +108,8 @@
   color: gray;
   border: 1px solid gray;
 }
+
+.btn-selected {
+  background-color: darkslateblue !important;
+  color: aliceblue;
+}

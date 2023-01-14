@@ -140,7 +140,14 @@ function App() {
                     }}
                     hidden
                   />
-                  <label htmlFor={`option${index + 1}`}>{item}</label>
+                  <label
+                    htmlFor={`option${index + 1}`}
+                    className={
+                      currentAnswer === index + 1 ? "btn-selected" : ""
+                    }
+                  >
+                    {item}
+                  </label>
                 </>
               ))}
             </div>
