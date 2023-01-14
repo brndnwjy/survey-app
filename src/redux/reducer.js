@@ -3,6 +3,7 @@ const initialState = {
   currentQuestion: 0,
   currentAnswer: 0,
   answers: [],
+  record: [],
 };
 
 const reducer = (state = initialState, action) => {
@@ -33,6 +34,14 @@ const reducer = (state = initialState, action) => {
           ...state.answers,
           { question: action.payload.qst, answer: action.payload.ans },
         ],
+      };
+
+    case "RETAKE_SURVEY":
+      return {
+        ...state,
+        currentAnswer: 0,
+        answers: [],
+        record: action.payload,
       };
 
     default:

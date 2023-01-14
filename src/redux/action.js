@@ -13,3 +13,7 @@ export const setAnswer = (ans) => (dispatch) => {
 export const submitAnswer = (qst, ans) => (dispatch) => {
   dispatch({ type: "SUBMIT_ANSWER", payload: { qst, ans } });
 };
+
+export const retakeSurvey = (ans) => (dispatch) => {
+  dispatch({ type: "RETAKE_SURVEY", payload: ans });
+};

@@ -73,14 +73,19 @@
   height: 50px;
   display: flex;
   align-items: center;
+  justify-content: space-between;
   font-size: 18px;
   border: none;
   border-radius: 8px;
   margin-bottom: 10px;
-  padding-left: 10px;
+  padding: 0 10px;
   box-shadow: 0 0 3px rgba(179, 14, 14, 0.5);
   transition: 0.5s;
   cursor: pointer;
+}
+
+.options label span:nth-of-type(2){
+  font-size: small;
 }
 
 .btn {
@@ -111,5 +116,10 @@
 
 .btn-selected {
   background-color: darkslateblue !important;
+  color: aliceblue;
+}
+
+.btn-saved {
+  background-color: darkorchid !important;
   color: aliceblue;
 }

@@ -5,6 +5,7 @@ import {
   setQuestion,
   setAnswer,
   submitAnswer,
+  retakeSurvey,
 } from "./redux/action";
 import { useTimer } from "use-timer";
 import Swal from "sweetalert2";
@@ -57,9 +58,8 @@ function App() {
 
   const dispatch = useDispatch();
 
-  const { section, currentQuestion, currentAnswer } = useSelector(
-    (state) => state
-  );
+  const { section, currentQuestion, currentAnswer, answers, record } =
+    useSelector((state) => state);
 
   const handleSection = (sect) => {
     dispatch(setSection(sect));
@@ -75,6 +75,10 @@ function App() {
 
   const handleSubmit = (qst) => {
     dispatch(submitAnswer(qst, currentAnswer));
+  };
+
+  const handleRetake = () => {
+    dispatch(retakeSurvey(answers));
   };
 
   // const [currentQuestion, setCurrentQuestion] = useState(0);
@@ -127,7 +131,7 @@ function App() {
               start();
             }}
           >
-            Start Survey
+            {record.length > 0 ? "Retake Survey" : "Start Survey"}
           </button>
         </section>
       ) : section === 1 ? (
@@ -158,10 +162,22 @@ function App() {
                   <label
                     htmlFor={`option${index + 1}`}
                     className={
-                      currentAnswer === index + 1 ? "btn-selected" : ""
+                      currentAnswer !== 0
+                        ? currentAnswer === index + 1
+                          ? "btn-selected"
+                          : ""
+                        : record[currentQuestion]?.answer === index + 1
+                        ? "btn-saved"
+                        : ""
                     }
                   >
-                    {item}
+                    {record[currentQuestion]?.answer === index + 1 ? (
+                      <>
+                        <span>{item}</span> <span>previous answer</span>
+                      </>
+                    ) : (
+                      item
+                    )}
                   </label>
                 </>
               ))}
@@ -209,7 +225,13 @@ function App() {
         <section className="finish card">
           <h1>Finish</h1>
           <h3>Thank you for your participation!</h3>
-          <button className="btn btn-alt" onClick={() => handleSection(0)}>
+          <button
+            className="btn btn-alt"
+            onClick={() => {
+              handleSection(0);
+              handleRetake();
+            }}
+          >
             Back
           </button>
         </section>
