@@ -1,10 +1,24 @@
 const initialState = {
+  section: 0,
+  currentQuestion: 0,
   currentAnswer: 0,
   answers: [],
 };
 
 const reducer = (state = initialState, action) => {
   switch (action.type) {
+    case "SET_SECTION":
+      return {
+        ...state,
+        section: action.payload,
+      };
+
+    case "SET_QUESTION":
+      return {
+        ...state,
+        currentQuestion: action.payload,
+      };
+
     case "SET_ANSWER":
       return {
         ...state,

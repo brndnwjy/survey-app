@@ -1,6 +1,11 @@
-import { useState } from "react";
+// import { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { setAnswer, submitAnswer } from "./redux/action";
+import {
+  setSection,
+  setQuestion,
+  setAnswer,
+  submitAnswer,
+} from "./redux/action";
 import { useTimer } from "use-timer";
 import Swal from "sweetalert2";
 
@@ -52,7 +57,17 @@ function App() {
 
   const dispatch = useDispatch();
 
-  const { currentAnswer } = useSelector((state) => state);
+  const { section, currentQuestion, currentAnswer } = useSelector(
+    (state) => state
+  );
+
+  const handleSection = (sect) => {
+    dispatch(setSection(sect));
+  };
+
+  const handleQuestion = (qst) => {
+    dispatch(setQuestion(qst));
+  };
 
   const handleAnswer = (ans) => {
     dispatch(setAnswer(ans));
@@ -62,12 +77,12 @@ function App() {
     dispatch(submitAnswer(qst, currentAnswer));
   };
 
-  const [currentQuestion, setCurrentQuestion] = useState(0);
-  const [section, setSection] = useState(0);
+  // const [currentQuestion, setCurrentQuestion] = useState(0);
+  // const [section, setSection] = useState(0);
 
   const timer = 10;
 
-  const { time, start, reset } = useTimer({
+  const { time, start, pause, reset } = useTimer({
     initialTime: timer,
     endTime: 0,
     timerType: "DECREMENTAL",
@@ -78,6 +93,7 @@ function App() {
   const hurry = Math.floor(timer / 5);
 
   if (time === 0) {
+    reset();
     Swal.fire({
       icon: "info",
       title: `Time's up!`,
@@ -85,9 +101,8 @@ function App() {
       timer: 2000,
       backdrop: "rgba(0,0,100,0.6)",
     }).then(() => {
-      setCurrentQuestion(0);
-      setSection(2);
-      reset();
+      handleQuestion(0);
+      handleSection(2);
     });
   }
 
@@ -108,7 +123,7 @@ function App() {
           <button
             className="btn btn-alt"
             onClick={() => {
-              setSection(1);
+              handleSection(1);
               start();
             }}
           >
@@ -158,6 +173,7 @@ function App() {
               type="button"
               className="btn"
               onClick={() => {
+                pause();
                 handleSubmit(currentQuestion);
                 Swal.fire({
                   icon: "success",
@@ -166,8 +182,8 @@ function App() {
                   timer: 2000,
                   backdrop: "rgba(0,0,100,0.6)",
                 }).then(() => {
-                  setCurrentQuestion(0);
-                  setSection(2);
+                  handleQuestion(0);
+                  handleSection(2);
                   reset();
                 });
               }}
@@ -181,7 +197,7 @@ function App() {
               className="btn"
               onClick={() => {
                 handleSubmit(currentQuestion);
-                setCurrentQuestion((current) => current + 1);
+                handleQuestion(currentQuestion + 1);
               }}
               disabled={currentAnswer === 0}
             >
@@ -193,7 +209,7 @@ function App() {
         <section className="finish card">
           <h1>Finish</h1>
           <h3>Thank you for your participation!</h3>
-          <button className="btn btn-alt" onClick={() => setSection(0)}>
+          <button className="btn btn-alt" onClick={() => handleSection(0)}>
             Back
           </button>
         </section>

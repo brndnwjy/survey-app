@@ -1,3 +1,11 @@
+export const setSection = (sect) => (dispatch) => {
+  dispatch({ type: "SET_SECTION", payload: sect });
+};
+
+export const setQuestion = (qst) => (dispatch) => {
+  dispatch({ type: "SET_QUESTION", payload: qst });
+};
+
 export const setAnswer = (ans) => (dispatch) => {
   dispatch({ type: "SET_ANSWER", payload: ans });
 };
