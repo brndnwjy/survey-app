@@ -1,5 +1,9 @@
-// import { useState } from "react";
+// import package(s)
 import { useDispatch, useSelector } from "react-redux";
+import { useTimer } from "use-timer";
+import Swal from "sweetalert2";
+
+// import action
 import {
   setSection,
   setQuestion,
@@ -7,14 +11,14 @@ import {
   submitAnswer,
   retakeSurvey,
 } from "./redux/action";
-import { useTimer } from "use-timer";
-import Swal from "sweetalert2";
 
+// import media and css file
 import illustration from "./illustration.png";
 import finish from "./finish.png";
 import "./App.css";
 
 function App() {
+  // questionnaire data
   const survey = {
     title: "Online Shopping",
     description:
@@ -59,7 +63,8 @@ function App() {
       ],
     },
     {
-      question: "What was your most important consideration while shopping online?",
+      question:
+        "What was your most important consideration while shopping online?",
       options: ["Product's quality", "Product's price", "Product's popularity"],
     },
     {
@@ -72,10 +77,12 @@ function App() {
     },
   ];
 
-  const dispatch = useDispatch();
-
+  // get global state
   const { section, currentQuestion, currentAnswer, answers, record } =
     useSelector((state) => state);
+
+  // dispatch function
+  const dispatch = useDispatch();
 
   const handleSection = (sect) => {
     dispatch(setSection(sect));
@@ -97,9 +104,7 @@ function App() {
     dispatch(retakeSurvey(answers));
   };
 
-  // const [currentQuestion, setCurrentQuestion] = useState(0);
-  // const [section, setSection] = useState(0);
-
+  // timer config
   const timer = 120;
 
   const { time, start, pause, reset } = useTimer({
