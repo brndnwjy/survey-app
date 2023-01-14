@@ -1,0 +1,132 @@
+.main {
+  height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: #97dece;
+}
+
+.card {
+  height: 60%;
+  width: 50%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: space-between;
+  background-color: aliceblue;
+  border: none;
+  border-radius: 8px;
+  padding: 25px;
+  box-shadow: 0 0 5px rgba(0, 0, 0, 0.2);
+}
+
+.header {
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+}
+
+.home,
+.finish {
+  text-align: center;
+}
+
+.card img {
+  height: 200px;
+  width: 200px;
+}
+
+.home div {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.home h1,
+.finish h1 {
+  font-size: 40px;
+  margin: 0;
+}
+
+.home h3,
+.finish h3 {
+  font-weight: 500;
+  max-width: 75%;
+}
+
+.hurry {
+  color: red;
+}
+
+.question {
+  min-height: 75%;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.question h2 {
+  margin-bottom: 30px;
+}
+
+.options {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+}
+
+.options label {
+  height: 50px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  font-size: 18px;
+  border: none;
+  border-radius: 8px;
+  margin-bottom: 10px;
+  padding: 0 10px;
+  box-shadow: 0 0 3px rgba(179, 14, 14, 0.5);
+  transition: 0.5s;
+  cursor: pointer;
+}
+
+.options label span:nth-of-type(2) {
+  font-size: small;
+}
+
+.btn {
+  width: 80%;
+  height: 50px;
+  background-color: aliceblue;
+  color: #62b6b7;
+  font-size: 20px;
+  border: 1px solid #62b6b7;
+  border-radius: 8px;
+  box-shadow: 0 0 3px rgba(179, 14, 14, 0.5);
+  transition: 0.5s;
+  cursor: pointer;
+}
+
+.btn-alt,
+.options label:hover,
+.btn:hover {
+  background-color: #97dece;
+  color: aliceblue;
+}
+
+.btn:disabled {
+  background-color: aliceblue;
+  color: #cacaca;
+  border: 1px solid #cacaca;
+}
+
+.btn-selected {
+  background-color: #62b6b7 !important;
+  color: aliceblue;
+}
+
+.btn-saved {
+  background-color: #62b6b7 !important;
+  color: aliceblue;
+}
