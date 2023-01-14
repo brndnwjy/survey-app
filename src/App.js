@@ -46,7 +46,21 @@ function App() {
 
   return (
     <main className="main">
-      <section className="card">
+      <section className="home card">
+        <div>
+          <h1>Home</h1>
+          <h3>
+            Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
+            eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim
+            ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut
+            aliquip ex ea commodo consequat.
+          </h3>
+        </div>
+
+        <button className="btn btn-alt">Start Survey</button>
+      </section>
+
+      {/* <section className="card">
         <div className="header">
           <small>Question 1/{questions.length}</small>
           <span>01:00</span>
@@ -67,12 +81,12 @@ function App() {
               </>
             ))}
           </div>
-
-          <button type="button" className="btn">
-            Next
-          </button>
         </div>
-      </section>
+
+        <button type="button" className="btn">
+          Next
+        </button>
+      </section> */}
     </main>
   );
 }
