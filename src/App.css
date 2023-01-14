@@ -87,6 +87,7 @@
   width: 80%;
   height: 50px;
   background-color: aliceblue;
+  color: dodgerblue;
   font-size: 20px;
   border: none;
   border-radius: 8px;
@@ -100,4 +101,10 @@
 .btn:hover {
   background-color: dodgerblue;
   color: aliceblue;
+}
+
+.btn:disabled {
+  background-color: aliceblue;
+  color: gray;
+  border: 1px solid gray;
 }

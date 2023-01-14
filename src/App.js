@@ -1,6 +1,9 @@
 import { useState } from "react";
-import Swal from "sweetalert2";
+import { useDispatch, useSelector } from "react-redux";
+import { setAnswer, submitAnswer } from "./redux/action";
 import { useTimer } from "use-timer";
+import Swal from "sweetalert2";
+
 import "./App.css";
 
 function App() {
@@ -46,6 +49,18 @@ function App() {
       options: ["one", "two", "three"],
     },
   ];
+
+  const dispatch = useDispatch();
+
+  const { currentAnswer } = useSelector((state) => state);
+
+  const handleAnswer = (ans) => {
+    dispatch(setAnswer(ans));
+  };
+
+  const handleSubmit = (qst) => {
+    dispatch(submitAnswer(qst, currentAnswer));
+  };
 
   const [currentQuestion, setCurrentQuestion] = useState(0);
   const [section, setSection] = useState(0);
@@ -120,6 +135,9 @@ function App() {
                     key={index}
                     id={`option${index + 1}`}
                     type="radio"
+                    onClick={() => {
+                      handleAnswer(index + 1);
+                    }}
                     hidden
                   />
                   <label htmlFor={`option${index + 1}`}>{item}</label>
@@ -133,6 +151,7 @@ function App() {
               type="button"
               className="btn"
               onClick={() => {
+                handleSubmit(currentQuestion);
                 Swal.fire({
                   icon: "success",
                   title: `All questions have been answered`,
@@ -145,6 +164,7 @@ function App() {
                   reset();
                 });
               }}
+              disabled={currentAnswer === 0}
             >
               Finish
             </button>
@@ -152,7 +172,11 @@ function App() {
             <button
               type="button"
               className="btn"
-              onClick={() => setCurrentQuestion((current) => current + 1)}
+              onClick={() => {
+                handleSubmit(currentQuestion);
+                setCurrentQuestion((current) => current + 1);
+              }}
+              disabled={currentAnswer === 0}
             >
               Next
             </button>
