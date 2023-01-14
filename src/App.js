@@ -1,4 +1,5 @@
 import { useState } from "react";
+import { useTimer } from "use-timer";
 import "./App.css";
 
 function App() {
@@ -48,6 +49,18 @@ function App() {
   const [currentQuestion, setCurrentQuestion] = useState(0);
   const [section, setSection] = useState(0);
 
+  const timer = 100
+
+  const { time, start, reset } = useTimer({
+    initialTime: timer,
+    endTime: 0,
+    timerType: "DECREMENTAL",
+  });
+
+  let mins = Math.floor(time / 60);
+  let secs = Math.floor(time - mins * 60);
+  const hurry = Math.floor(timer / 5);
+
   return (
     <main className="main">
       {section === 0 ? (
@@ -62,17 +75,25 @@ function App() {
             </h3>
           </div>
 
-          <button className="btn btn-alt" onClick={() => setSection(1)}>
+          <button
+            className="btn btn-alt"
+            onClick={() => {
+              setSection(1);
+              start();
+            }}
+          >
             Start Survey
           </button>
         </section>
-      ) : (
+      ) : section === 1 ? (
         <section className="card">
           <div className="header">
             <small>
               Question {currentQuestion + 1}/{questions.length}
             </small>
-            <span>01:00</span>
+            <span className={time <= hurry && "hurry"}>
+              {mins <= 9 ? "0" + mins : mins}:{secs <= 9 ? "0" + secs : secs}
+            </span>
           </div>
 
           <div className="question">
@@ -98,7 +119,8 @@ function App() {
               className="btn"
               onClick={() => {
                 setCurrentQuestion(0);
-                setSection(0);
+                setSection(2);
+                reset();
               }}
             >
               Finish
@@ -112,6 +134,14 @@ function App() {
               Next
             </button>
           )}
+        </section>
+      ) : (
+        <section className="finish card">
+          <h1>Finish</h1>
+          <h3>Thank you for your participation!</h3>
+          <button className="btn btn-alt" onClick={() => setSection(0)}>
+            Back
+          </button>
         </section>
       )}
     </main>
