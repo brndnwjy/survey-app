@@ -10,49 +10,65 @@ import {
 import { useTimer } from "use-timer";
 import Swal from "sweetalert2";
 
+import illustration from "./illustration.png";
+import finish from "./finish.png";
 import "./App.css";
 
 function App() {
+  const survey = {
+    title: "Online Shopping",
+    description:
+      "We would like to know what is currently popular and demanding among the e-commerce customers",
+  };
+
   const questions = [
     {
-      question: "question one?",
-      options: ["one", "two", "three"],
+      question: "How often do you online shop?",
+      options: [
+        "At least 10 times a month",
+        "4-10 times month",
+        "1-3 times a month",
+      ],
     },
     {
-      question: "question two?",
-      options: ["one", "two", "three"],
+      question: "What do you usually buy?",
+      options: ["Clothes", "Electronics", "Food stocks"],
     },
     {
-      question: "question three?",
-      options: ["one", "two", "three"],
+      question: "Which platform you mostly use?",
+      options: ["Tokopedia", "Shopee", "Other"],
     },
     {
-      question: "question four?",
-      options: ["one", "two", "three"],
+      question: "How much do you spend monthly for online shopping?",
+      options: ["Above 1mio", "500k - 1mio", "Under 500k"],
     },
     {
-      question: "question five?",
-      options: ["one", "two", "three"],
+      question: "Is the quality of the goods as expected?",
+      options: ["Yes, definitely", "Sometimes", "Not at all"],
     },
     {
-      question: "question six?",
-      options: ["one", "two", "three"],
+      question: "How often do you used coupons/discounts?",
+      options: ["Habitual", "Occasionally", "Seldom"],
     },
     {
-      question: "question seven?",
-      options: ["one", "two", "three"],
+      question: "Were you able to find enough information about the product?",
+      options: [
+        "Yes, it's sourceful",
+        "Enough information to get to know the product",
+        "No, it's a bit confusing",
+      ],
     },
     {
-      question: "question eight?",
-      options: ["one", "two", "three"],
+      question: "What was your most important consideration while shopping online?",
+      options: ["Product's quality", "Product's price", "Product's popularity"],
     },
     {
-      question: "question nine?",
-      options: ["one", "two", "three"],
+      question: "Is shopping online any better than shopping offline/on-site?",
+      options: ["Yes", "No", "It's just the same"],
     },
     {
-      question: "question ten?",
-      options: ["one", "two", "three"],
+      question: "Were you satisfied with the overall experience?",
+      options: ["Yes", "No", "I don't know"],
     },
   ];
 
@@ -84,7 +100,7 @@ function App() {
   // const [currentQuestion, setCurrentQuestion] = useState(0);
   // const [section, setSection] = useState(0);
 
-  const timer = 10;
+  const timer = 120;
 
   const { time, start, pause, reset } = useTimer({
     initialTime: timer,
@@ -103,7 +119,7 @@ function App() {
       title: `Time's up!`,
       showConfirmButton: false,
       timer: 2000,
-      backdrop: "rgba(0,0,100,0.6)",
+      backdrop: "rgba(106, 207, 109, 0.6)",
     }).then(() => {
       handleQuestion(0);
       handleSection(2);
@@ -114,14 +130,10 @@ function App() {
     <main className="main">
       {section === 0 ? (
         <section className="home card">
+          <img src={illustration} alt="survey illustration" />
           <div>
-            <h1>Home</h1>
-            <h3>
-              Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
-              eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut
-              enim ad minim veniam, quis nostrud exercitation ullamco laboris
-              nisi ut aliquip ex ea commodo consequat.
-            </h3>
+            <h1>{survey.title}</h1>
+            <h3>{survey.description}</h3>
           </div>
 
           <button
@@ -196,7 +208,7 @@ function App() {
                   title: `All questions have been answered`,
                   showConfirmButton: false,
                   timer: 2000,
-                  backdrop: "rgba(0,0,100,0.6)",
+                  backdrop: "rgba(106, 207, 109, 0.6)",
                 }).then(() => {
                   handleQuestion(0);
                   handleSection(2);
@@ -223,8 +235,12 @@ function App() {
         </section>
       ) : (
         <section className="finish card">
-          <h1>Finish</h1>
-          <h3>Thank you for your participation!</h3>
+          <img src={finish} alt="finish illustration" />
+          <h1>Thank you for your answers!</h1>
+          <h3>
+            We appreciate your time for answering this survey, I hope you can
+            help us gather some data again in near future
+          </h3>
           <button
             className="btn btn-alt"
             onClick={() => {
