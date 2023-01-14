@@ -1,0 +1,63 @@
+.main {
+  height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: dodgerblue;
+}
+
+.card {
+  height: 50%;
+  width: 50%;
+  background-color: aliceblue;
+  border: none;
+  border-radius: 8px;
+  padding: 25px;
+  box-shadow: 0 0 5px rgba(0, 0, 0, 0.2);
+}
+
+.header {
+  display: flex;
+  justify-content: space-between;
+}
+
+.question {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.options {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+}
+
+.options label {
+  height: 50px;
+  display: flex;
+  align-items: center;
+  border: none;
+  border-radius: 8px;
+  margin-bottom: 10px;
+  padding-left: 10px;
+  box-shadow: 0 0 3px rgba(179, 14, 14, 0.5);
+  transition: 0.5s;
+}
+
+.btn {
+  width: 80%;
+  height: 50px;
+  background-color: aliceblue;
+  border: none;
+  border-radius: 8px;
+  box-shadow: 0 0 3px rgba(179, 14, 14, 0.5);
+  transition: 0.5s;
+  cursor: pointer;
+}
+
+.options label:hover,
+.btn:hover {
+  background-color: dodgerblue;
+  color: aliceblue;
+}
