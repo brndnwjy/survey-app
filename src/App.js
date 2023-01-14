@@ -45,6 +45,7 @@ function App() {
     },
   ];
 
+  const [currentQuestion, setCurrentQuestion] = useState(0);
   const [section, setSection] = useState(0);
 
   return (
@@ -68,14 +69,16 @@ function App() {
       ) : (
         <section className="card">
           <div className="header">
-            <small>Question 1/{questions.length}</small>
+            <small>
+              Question {currentQuestion + 1}/{questions.length}
+            </small>
             <span>01:00</span>
           </div>
 
           <div className="question">
-            <h2>{questions[0].question}</h2>
+            <h2>{questions[currentQuestion].question}</h2>
             <div className="options">
-              {questions[0].options.map((item, index) => (
+              {questions[currentQuestion].options.map((item, index) => (
                 <>
                   <input
                     key={index}
@@ -89,9 +92,26 @@ function App() {
             </div>
           </div>
 
-          <button type="button" className="btn" onClick={() => setSection(0)}>
-            Next
-          </button>
+          {currentQuestion + 1 === questions.length ? (
+            <button
+              type="button"
+              className="btn"
+              onClick={() => {
+                setCurrentQuestion(0);
+                setSection(0);
+              }}
+            >
+              Finish
+            </button>
+          ) : (
+            <button
+              type="button"
+              className="btn"
+              onClick={() => setCurrentQuestion((current) => current + 1)}
+            >
+              Next
+            </button>
+          )}
         </section>
       )}
     </main>
