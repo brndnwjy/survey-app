@@ -1,4 +1,5 @@
 import { useState } from "react";
+import Swal from "sweetalert2";
 import { useTimer } from "use-timer";
 import "./App.css";
 
@@ -49,7 +50,7 @@ function App() {
   const [currentQuestion, setCurrentQuestion] = useState(0);
   const [section, setSection] = useState(0);
 
-  const timer = 100
+  const timer = 10;
 
   const { time, start, reset } = useTimer({
     initialTime: timer,
@@ -60,6 +61,20 @@ function App() {
   let mins = Math.floor(time / 60);
   let secs = Math.floor(time - mins * 60);
   const hurry = Math.floor(timer / 5);
+
+  if (time === 0) {
+    Swal.fire({
+      icon: "info",
+      title: `Time's up!`,
+      showConfirmButton: false,
+      timer: 2000,
+      backdrop: "rgba(0,0,100,0.6)",
+    }).then(() => {
+      setCurrentQuestion(0);
+      setSection(2);
+      reset();
+    });
+  }
 
   return (
     <main className="main">
@@ -118,9 +133,17 @@ function App() {
               type="button"
               className="btn"
               onClick={() => {
-                setCurrentQuestion(0);
-                setSection(2);
-                reset();
+                Swal.fire({
+                  icon: "success",
+                  title: `All questions have been answered`,
+                  showConfirmButton: false,
+                  timer: 2000,
+                  backdrop: "rgba(0,0,100,0.6)",
+                }).then(() => {
+                  setCurrentQuestion(0);
+                  setSection(2);
+                  reset();
+                });
               }}
             >
               Finish
